@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 
-class Square extends Component {
-    state = {};
+class Holder extends Component {
+    state = { value: 'BB' };
     render() {
         var cardArray = [
             { kanji: '白', hiragana: 'しろ' },
@@ -17,7 +17,30 @@ class Square extends Component {
 
         console.log('length: ' + cardArray.length);
 
-        return <div>Output {display} </div>;
+        return (
+            <div>
+                {this.state.value} - {display}
+            </div>
+        );
+    }
+}
+
+class Square extends Component {
+    state = { value: 'BB' };
+    render() {
+        return <div>{this.formatGene()}</div>;
+    }
+
+    formatGene() {
+        var value = 'xxxx';
+
+        if (this.state.value === 'BB') {
+            value = '(BB) - Big Eyes';
+        } else {
+            value = '(???)';
+        }
+
+        return value;
     }
 }
 
@@ -66,7 +89,7 @@ class App extends Component {
                     <br />
                     <button>Maternal - BB gene (blue skin)</button>
                 </div>
-
+                <br />
                 <div className="App">
                     <Grid />
                 </div>
