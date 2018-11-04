@@ -28,7 +28,13 @@ class Holder extends Component {
 class Square extends Component {
     state = { value: 'BB' };
     render() {
-        return <div>{this.formatGene()}</div>;
+        return (
+            <div>
+                <span className="badge badge-secondary">
+                    {this.formatGene()}
+                </span>
+            </div>
+        );
     }
 
     formatGene() {
@@ -55,24 +61,7 @@ class Grid extends Component {
                 ref={this.simulateClick}
                 onClick={() => console.log('clicked??')}
             >
-                <table>
-                    <tr>
-                        <td>
-                            <Square />
-                        </td>
-                        <td>
-                            <Square />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <Square />
-                        </td>
-                        <td>
-                            <Square />
-                        </td>
-                    </tr>
-                </table>
+                <Square />
             </div>
         );
     }
@@ -85,9 +74,13 @@ class App extends Component {
                 <div>
                     <div>Dragons default to small eyes and red skin</div>
                     <br />
-                    <button>Paternal - EE gene (big eyes)</button>
+                    <button className="btn btn-primary">
+                        Paternal - EE gene (big eyes)
+                    </button>
                     <br />
-                    <button>Maternal - BB gene (blue skin)</button>
+                    <button className="btn btn-primary">
+                        Maternal - BB gene (blue skin)
+                    </button>
                 </div>
                 <br />
                 <div className="App">
