@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import EventEmitter from 'EventEmitter';
+
+var events = new EventEmitter();
 
 class Holder extends Component {
     state = { value: 'BB' };
@@ -27,7 +30,13 @@ class Holder extends Component {
 
 class Square extends Component {
     state = { value: 'BB' };
+
     render() {
+        events.on('change-state', function(state) {
+            console.log('change-state detected!');
+            //Square.this.setState({ value: 'XX' });
+        });
+
         return (
             <div>
                 <span className="badge badge-secondary">
@@ -50,18 +59,43 @@ class Square extends Component {
     }
 }
 
-class Grid extends Component {
+class SquareWithFormatting extends Component {
+    state = {};
+
     simulateClick(e) {
-        e.click();
+        //e.click();
+
+        console.log('clicked??');
+        // inside Component1
+        events.emit('change-state', { value: 'YY' });
     }
 
     render() {
         return (
-            <div
-                ref={this.simulateClick}
-                onClick={() => console.log('clicked??')}
-            >
-                <Square />
+            <div className="col-sm-4">
+                <div onClick={this.simulateClick}>
+                    <Square />
+                </div>
+            </div>
+        );
+    }
+}
+
+//export default SquareWithFormatting;
+
+class Grid extends Component {
+    render() {
+        return (
+            <div className="container">
+                {' '}
+                <div className="row">
+                    <SquareWithFormatting />
+                    <SquareWithFormatting />
+                </div>
+                <div className="row">
+                    <SquareWithFormatting />
+                    <SquareWithFormatting />
+                </div>
             </div>
         );
     }
