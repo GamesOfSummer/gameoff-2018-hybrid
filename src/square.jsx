@@ -22,7 +22,7 @@ export default class Square extends Component {
     }
 
     formatGene() {
-        var value = 'xxxx';
+        var value = '';
 
         if (this.state.value === 'BB') {
             value = '(BB) - Big Eyes';
